@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+
+      xmlns:custom="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+  <meta charset="UTF-8">
+  <title>List product</title>
+</head>
+<body>
+<th:block th:replace="layout"></th:block>
+<div class="container body-content" layout:fragment="content">
+  <a th:href ="@{nhanvien/add}" class="btn btn-primary">Create new Employee</a>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">tenNv</th>
+      <th scope="col">phai</th>
+      <th scope="col">noisinh</th>
+      <th scope="col">phongban</th>
+      <th scope="col">luong</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="nhanvien: ${nhanviens}">
+      <th scope="row" th:text="${nhanvien.id}"> </th>
+      <td th:text="${nhanvien.tenNv}"></td>
+      <td>
+        <img height="120" width="150" th:src="@{/images/} + ${nhanvien.phai == 'NAM' ? 'namgioi1.jpg' : 'phunu1.jpg'}"/>
+      </td>
+      <td th:text="${nhanvien.noisinh}"></td>
+      <!--            <td>-->
+      <!--                <img height="120"  width="150" th:src="@{/images/} + ${product.image}"/>-->
+      <!--            </td>-->
+      <td th:text="${nhanvien.phongban.tenphong}"></td>
+      <td th:text="${nhanvien.luong}"></td>
+      <td>
+        <a class="btn btn-danger" custom:linkMethod="post" th:href="@{/nhanvien/delete/{id}(id=${nhanvien.id})}">Delete</a>
+        <a class="btn btn-danger" custom:linkMethod="post" th:href="@{/nhanvien/edit/{id}(id=${nhanvien.id})}">Edit</a>
+      </td>
+    </tbody>
+  </table>
+</div>
+
+
+</body>
+</html>
